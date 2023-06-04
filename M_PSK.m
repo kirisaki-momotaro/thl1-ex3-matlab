@@ -62,13 +62,42 @@ Xi=Xin_srrc.*i_carrier;
 Xq=Xqn_srrc.*q_carrier;
 
 figure(4)
-plot(signal_t,i_carrier);
+plot(signal_t,Xi);
 grid on;
 title('Xin carrier 16PSK waveform')
 figure(5)
-plot(signal_t,q_carrier);
+plot(signal_t,Xq);
 grid on;
 title('Xqn carrier 16PSK waveform')
+
+%5
+Xt=Xi+Xq;
+figure(6)
+plot(signal_t,Xi);
+grid on;
+title('channel entrance X(t)')
+
+%7 add gaussian noise
+SNR=10;
+noiseVar=1/(Ts*(10^(SNR/10)));
+W=wgn(1,length(signal_t),noiseVar,'linear');
+
+Y=Xt+W;
+
+figure(7)
+plot(signal_t,W);
+grid on;
+title('gaussian noise')
+
+figure(8)
+plot(signal_t,Y);
+grid on;
+title('gaussian noise with signal')
+
+%8
+
+
+
 
 
 

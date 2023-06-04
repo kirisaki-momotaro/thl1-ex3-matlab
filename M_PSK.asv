@@ -52,7 +52,36 @@ plot(signal_t,Xqn_srrc);
 grid on;
 title('modulated instance Xqn of 16PSK waveform')
 
-i
+
+%4
+F0=200 %Hz carrier freq
+i_carrier=2*cos(2*pi*F0*signal_t);
+q_carrier=-2*sin(2*pi*F0*signal_t);
+
+Xi=Xin_srrc.*i_carrier;
+Xq=Xqn_srrc.*q_carrier;
+
+figure(4)
+plot(signal_t,Xi);
+grid on;
+title('Xin carrier 16PSK waveform')
+figure(5)
+plot(signal_t,Xq);
+grid on;
+title('Xqn carrier 16PSK waveform')
+
+%5
+Xt=Xi+Xq;
+figure(6)
+plot(signal_t,Xi);
+grid on;
+title('channel entrance X(t)')
+
+%7 add gaussian noise
+SNR=10
+noiseVar=1/(Ts*pow(10,SN
+W=wgn(1,length(Xt),noiseVar,'linear')
+
 
 
 
