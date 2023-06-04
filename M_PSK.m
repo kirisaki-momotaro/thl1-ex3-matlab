@@ -125,6 +125,26 @@ grid on;
 title('SRRC filtered instance Xqn of 16PSK waveform')
 
 %10
+Xi_sampled=Xin_srrc_reciever(1:over:end);
+Xq_sampled=Xqn_srrc_reciever(1:over:end);
+
+X_reciever(1,:)=Xi_sampled;
+X_reciever(2,:)=Xq_sampled;
+figure(13)
+scatterplot(rot90(X_reciever));
+
+%11
+out_b=detect_PSK_16(X_reciever)
+
+isSame = isequal(out_b(1:end/2), out_b(end/2+1:end));
+
+% Display the result
+if isSame
+    disp('The first half is the same as the second half.');
+else
+    disp('The first half is not the same as the second half.');
+end
+
 
 
 
