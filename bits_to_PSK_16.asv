@@ -1,0 +1,29 @@
+function [ output ] = bits_to_PSK_16( input )
+
+gray_conversion_Table = [
+    0 0 0 0;
+    0 0 0 1;
+    0 0 1 1;
+    0 0 1 0;
+    0 1 1 0;
+    0 1 1 1;
+    0 1 0 1;
+    0 1 0 0;
+    1 1 0 0;
+    1 1 0 1;
+    1 1 1 1;
+    1 1 1 0;
+    1 0 1 0;
+    1 0 1 1;
+    1 0 0 1;
+    1 0 0 0
+];
+
+for i=1:4:length(input)
+    bin_symbol = input(i:i+4); % 4-bit binary number
+    gray_bin_symbol = gray_conversion_Table(bi2de(bin_symbol) + 1, :); % Convert binary to decimal and lookup corresponding Gray code
+    input(i:i+4)=gray_bin_symbol;
+end 
+output=input;
+end
+
