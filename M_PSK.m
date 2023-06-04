@@ -11,15 +11,16 @@ bit_seq(1:4)
 X = bits_to_PSK_16(bit_seq); %random symbols
 
 
-%PSK ASTERISM
 real=X(1,:)
 imag=X(2,:)
 
+
+%PSK ASTERISM PLOT
 figure(1)
 plot(real,imag,'o')
 
 
-
+%3
 %initial parameters
 T=0.01;
 over=10;
@@ -31,28 +32,43 @@ a=0.5;
 %create SRRC pulse
 [phi, t] = srrc_pulse(T, over, A, a);
 
-
+%upsample
 X_real_delta = 1/Ts * upsample(real, over);
 X_imag_delta = 1/Ts * upsample(imag, over);
 
+%define time
 time = 0:Ts:N*Ts*over-Ts;
-
 signal_t = [time(1)+t(1):Ts:time(end)+t(end)];
 
-signal = conv(X_real_delta,phi)*Ts; %convolute symbols waveform with SRRC pulse
+Xin_srrc = conv(X_real_delta,phi)*Ts; %convolute symbols waveform with SRRC pulse
+Xqn_srrc = conv(X_imag_delta,phi)*Ts; %convolute symbols waveform with SRRC pulse
 
 figure(2)
-plot(signal_t,signal);
+plot(signal_t,Xin_srrc);
 grid on;
-title('modulated instance of 2PAM waveform')
-
-signal = conv(X_imag_delta,phi)*Ts; %convolute symbols waveform with SRRC pulse
-
+title('modulated instance Xin of 16PSK waveform')
 figure(3)
-plot(signal_t,signal);
+plot(signal_t,Xqn_srrc);
 grid on;
-title('modulated instance of 2PAM waveform')
+title('modulated instance Xqn of 16PSK waveform')
 
+
+%4
+F0=200 %Hz carrier freq
+i_carrier=2*cos(2*pi*F0*signal_t);
+q_carrier=-2*sin(2*pi*F0*signal_t);
+
+Xi=Xin_srrc.*i_carrier;
+Xq=Xqn_srrc.*q_carrier;
+
+figure(4)
+plot(signal_t,i_carrier);
+grid on;
+title('Xin carrier 16PSK waveform')
+figure(5)
+plot(signal_t,q_carrier);
+grid on;
+title('Xqn carrier 16PSK waveform')
 
 
 
