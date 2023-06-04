@@ -82,7 +82,7 @@ SNR=10;
 noiseVar=1/(Ts*(10^(SNR/10)));
 W=wgn(1,length(signal_t),noiseVar,'linear');
 
-Y=Xt+W;
+Y=Xt;
 
 figure(7)
 plot(signal_t,W);
@@ -95,6 +95,36 @@ grid on;
 title('gaussian noise with signal')
 
 %8
+F0=200 %Hz reciever freq
+i_reciever=cos(2*pi*F0*signal_t);
+q_reciever=-sin(2*pi*F0*signal_t);
+
+Xi_reciever=Y.*i_reciever;
+Xq_reciever=Y.*q_reciever;
+
+figure(9)
+plot(signal_t,Xi_reciever);
+grid on;
+title('Xi_reciever 16PSK waveform')
+figure(10)
+plot(signal_t,Xq_reciever);
+grid on;
+title('Xq_reciever 16PSK waveform')
+
+%9
+Xin_srrc_reciever = conv(Xi_reciever,phi)*Ts; %convolute symbols waveform with SRRC pulse
+Xqn_srrc_reciever = conv(Xq_reciever,phi)*Ts; %convolute symbols waveform with SRRC pulse
+signal_t_reciever = [signal_t(1)+t(1):Ts:signal_t(end)+t(end)];
+figure(11)
+plot(signal_t_reciever,Xin_srrc_reciever);
+grid on;
+title('SRRC filtered instance Xin of 16PSK waveform')
+figure(12)
+plot(signal_t_reciever,Xqn_srrc_reciever);
+grid on;
+title('SRRC filtered instance Xqn of 16PSK waveform')
+
+%10
 
 
 
