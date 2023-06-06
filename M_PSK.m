@@ -8,7 +8,7 @@ close all
 N=100; %number of symbols
 bit_seq = (sign(randn(4*N, 1)) + 1)/2; 
 X = bits_to_PSK_16(bit_seq); %random symbols
-rot90(bit_seq);
+rot90(bit_seq)
 
 real=X(1,:);
 imag=X(2,:);
@@ -81,7 +81,7 @@ SNR=10;
 noiseVar=1/(Ts*(10^(SNR/10)));
 W=wgn(1,length(signal_t),noiseVar,'linear');
 
-Y=Xt+W;
+Y=Xt;
 
 figure(7)
 plot(signal_t,W);
@@ -126,14 +126,15 @@ title('SRRC filtered instance Xqn of 16PSK waveform')
 %10
 Xi_sampled=Xin_srrc_reciever(1:over:end);
 Xq_sampled=Xqn_srrc_reciever(1:over:end);
-
+Xi_sampled=Xi_sampled(9:end-8);
+Xq_sampled=Xq_sampled(9:end-8);
 X_reciever(1,:)=Xi_sampled;
 X_reciever(2,:)=Xq_sampled;
 figure(13)
 scatterplot(rot90(X_reciever));
 
 %11
-out_b=detect_PSK_16(X_reciever);
+out_b=detect_PSK_16(X_reciever)
 
 
 
