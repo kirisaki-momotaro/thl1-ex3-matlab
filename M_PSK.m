@@ -82,7 +82,7 @@ SNR=10;
 noiseVar=1/(Ts*(10^(SNR/10)));
 W=wgn(1,length(signal_t),noiseVar,'linear');
 
-Y=Xt;
+Y=Xt+W;
 
 figure(7)
 plot(signal_t,W);
@@ -136,14 +136,6 @@ scatterplot(rot90(X_reciever));
 %11
 out_b=detect_PSK_16(X_reciever)
 
-isSame = isequal(out_b(1:end/2), out_b(end/2+1:end));
-
-% Display the result
-if isSame
-    disp('The first half is the same as the second half.');
-else
-    disp('The first half is not the same as the second half.');
-end
 
 
 
