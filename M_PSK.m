@@ -7,12 +7,11 @@ close all
 %16-PSK
 N=100; %number of symbols
 bit_seq = (sign(randn(4*N, 1)) + 1)/2; 
-bit_seq(1:4)
 X = bits_to_PSK_16(bit_seq); %random symbols
+rot90(bit_seq);
 
-
-real=X(1,:)
-imag=X(2,:)
+real=X(1,:);
+imag=X(2,:);
 
 
 %PSK ASTERISM PLOT
@@ -134,7 +133,7 @@ figure(13)
 scatterplot(rot90(X_reciever));
 
 %11
-out_b=detect_PSK_16(X_reciever)
+out_b=detect_PSK_16(X_reciever);
 
 
 

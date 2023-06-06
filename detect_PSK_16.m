@@ -31,9 +31,9 @@ for i = 1:length(input)
     angles_in = cos((0:15) * 2 * pi / 16);  % Compute angles for the 16-PSK 
     angles_qn = sin((0:15) * 2 * pi / 16);  % Compute angles for the 16-PSK constellation
     distances = sqrt((symbol_in - angles_in).^2 + (symbol_qn - angles_qn).^2);     
-    [~, index] = min(distances)  % Find the index of the nearest neighbor
+    [~, index] = min(distances);  % Find the index of the nearest neighbor
 
-    gray_bin_symbol = gray_conversion_Table(index);
+    gray_bin_symbol = gray_conversion_Table(index,:);
     output = [output gray_bin_symbol];
 end
 
