@@ -53,16 +53,24 @@ for i = 1:length(input)
     distances = sqrt((symbol_in - angles_in).^2 + (symbol_qn - angles_qn).^2);
     
     [~, index] = min(distances) ; % Find the index of the nearest neighbor
+    % gray_dec=index-1;
+    % gray_bin=de2bi(gray_dec,4,'left-msb');
+    gray_bin=bin_conversion_Table(index,:);
+    dec_bin=bi2de()
+    %bin=de2bi(dec_symbol-1,4,'left-msb');
+    %bin=bin_conversion_Table(index,:);
     
-    gray_bin=bin_conversion_Table(index,:);   
-    [~, dec_symbol] = ismember(gray_bin, gray_conversion_Table, 'rows');    
-    bin=bin_conversion_Table(dec_symbol,:);    
+    
+    
+    
     output = [output bin];
     
-    
+    %gray_bin_symbol = gray_conversion_Table(index,:);
+    %output = [output gray_bin_symbol];
 end
 output
-
+%z = gray2bin(output,'qam',16);
+%output=z;
 
 
 end

@@ -8,7 +8,7 @@ close all
 N=100; %number of symbols
 bit_seq = (sign(randn(4*N, 1)) + 1)/2; 
 X = bits_to_PSK_16(bit_seq); %random symbols
-rot90(bit_seq)
+rot90(bit_seq);
 
 real=X(1,:);
 imag=X(2,:);
@@ -81,7 +81,7 @@ SNR=10;
 noiseVar=1/(Ts*(10^(SNR/10)));
 W=wgn(1,length(signal_t),noiseVar,'linear');
 
-Y=Xt;
+Y=Xt+W;
 
 figure(7)
 plot(signal_t,W);
@@ -134,10 +134,12 @@ figure(13)
 scatterplot(rot90(X_reciever));
 
 %11
-out_b=detect_PSK_16(X_reciever)
+out_b=detect_PSK_16(X_reciever);
 
+num_of_bit_errors(out_b,rot90(bit_seq))
 
-
+out_b(end-11:end)
+rot90(bit_seq(end-11:end))
 
 
 
