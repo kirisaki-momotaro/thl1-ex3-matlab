@@ -73,19 +73,19 @@ plot(signal_t,Xq);
 grid on;
 title('Xqn carrier 16PSK waveform')
 
-%5 add upp the 2 signals to be sent
+%5
 Xt=Xi+Xq;
 figure(6)
 plot(signal_t,Xi);
 grid on;
 title('channel entrance X(t)')
 
-%7 create gaussian noise
+%7 add gaussian noise
 SNR=10;
 noiseVar=1/(Ts*(10^(SNR/10)));
 W=wgn(1,length(signal_t),noiseVar,'linear');
 
-Y=Xt+W; %add noise
+Y=Xt+W;
 
 figure(7)
 plot(signal_t,W);
