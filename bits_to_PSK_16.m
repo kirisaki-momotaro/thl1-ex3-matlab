@@ -27,7 +27,7 @@ for i=1:length(input)/4
 
     dec_symbol=bi2de(bin_symbol,'left-msb');
 
-    gray_bin_symbol = gray_conversion_Table(dec_symbol +1, :) % Convert binary to decimal and lookup corresponding Gray code
+    gray_bin_symbol = gray_conversion_Table(dec_symbol +1, :); % Convert binary to decimal and lookup corresponding Gray code
     
     
     gray_dec_symbol=bi2de(gray_bin_symbol,'left-msb');
