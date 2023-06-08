@@ -67,12 +67,22 @@ for SNR=-2:2:24
         X_reciever(2,:)=Xq_sampled;
         %11
         out_b=detect_PSK_16(X_reciever);
-        total_error(j)=num_of_bit_errors(out_b,rot90(bit_seq))/(4*N);
+        P_bit_error(j)=num_of_bit_errors(out_b,rot90(bit_seq))/(4*N);
+        P_symbol_error(j)=num_of_symbol_errors(X,X_reciever)/(2*N);
     end 
 end
 
-total_error
-
+P_bit_error
+P_symbol_error
+t=-2:2:24
+figure(25);
+semilogy(t,P_symbol_error);
+grid on;
+title('symbol error rate by SNR')
+figure(26);
+semilogy(t,P_bit_error);
+grid on;
+title('bit error rate by SNR')
 
 
 

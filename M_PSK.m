@@ -225,21 +225,22 @@ scatterplot(rot90(X_reciever));
 %11
 out_b=detect_PSK_16(X_reciever);
 
-num_of_bit_errors(out_b,rot90(bit_seq))
+bit_error=num_of_bit_errors(out_b,rot90(bit_seq))
+sym_error=num_of_symbol_errors(X,X_reciever)
 
 out_b(end-11:end)
 rot90(bit_seq(end-11:end))
 
-save images
-FolderName = ('C:\Users\chris\Desktop\THL I\ex3\thl1-ex3-matlab\images');   % using my directory
-FigList = findobj(allchild(0), 'flat', 'Type', 'figure');
-for iFig = 1:length(FigList)
-  FigHandle = FigList(iFig);
-  FigName   = num2str(get(FigHandle, 'Number'));
-  set(0, 'CurrentFigure', FigHandle);
-%   saveas(FigHandle, strcat(FigName, '.png'));
-  saveas(FigHandle, fullfile(FolderName,strcat(FigName, '.png'))); % specify the full path
-end
+% save images
+% FolderName = ('C:\Users\chris\Desktop\THL I\ex3\thl1-ex3-matlab\images');   % using my directory
+% FigList = findobj(allchild(0), 'flat', 'Type', 'figure');
+% for iFig = 1:length(FigList)
+%   FigHandle = FigList(iFig);
+%   FigName   = num2str(get(FigHandle, 'Number'));
+%   set(0, 'CurrentFigure', FigHandle);
+% %   saveas(FigHandle, strcat(FigName, '.png'));
+%   saveas(FigHandle, fullfile(FolderName,strcat(FigName, '.png'))); % specify the full path
+% end
 
 
 
