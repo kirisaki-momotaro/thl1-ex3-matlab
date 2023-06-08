@@ -1,7 +1,7 @@
 clear all
 close all
 
-K=100
+K=1000
 j=0;
 for SNR=-2:2:24
     j=j+1;
@@ -84,5 +84,14 @@ semilogy(t,P_bit_error);
 grid on;
 title('bit error rate by SNR')
 
-
+save images
+FolderName = ('C:\Users\chris\Desktop\THL I\ex3\thl1-ex3-matlab\images');   % using my directory
+FigList = findobj(allchild(0), 'flat', 'Type', 'figure');
+for iFig = 1:length(FigList)
+  FigHandle = FigList(iFig);
+  FigName   = num2str(get(FigHandle, 'Number'));
+  set(0, 'CurrentFigure', FigHandle);
+%   saveas(FigHandle, strcat(FigName, '.png'));
+  saveas(FigHandle, fullfile(FolderName,strcat(FigName, '.png'))); % specify the full path
+end
 

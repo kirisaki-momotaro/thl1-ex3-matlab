@@ -46,11 +46,11 @@ Xqn_srrc = conv(X_imag_delta,phi)*Ts; %convolute symbols waveform with SRRC puls
 figure(2)
 plot(signal_t,Xin_srrc);
 grid on;
-title('modulated instance Xin of 16PSK waveform')
+title('3) SRRC instance Xin of 16PSK waveform')
 figure(3)
 plot(signal_t,Xqn_srrc);
 grid on;
-title('modulated instance Xqn of 16PSK waveform')
+title('3) SRRC instance Xqn of 16PSK waveform')
 
 %periodogram plot
 Nf=1024;
@@ -69,11 +69,11 @@ power_fftshift_SRRC_Xqn = abs(fftshift_SRRC_Xqn).^2;     % zero-centered power
 figure(4)
 plot(freq,power_fftshift_SRRC_Xin)
 grid on;
-title('periodogram of instance Xin SRRC')
+title('3) periodogram of SRRC instance Xin')
 figure(5)
 plot(freq,power_fftshift_SRRC_Xqn)
 grid on;
-title('periodogram of instance Xqn SRRC')
+title('3) periodogram of SRRC instance Xqn')
 
 %4
 %define carrier signals
@@ -89,11 +89,11 @@ Xq=Xqn_srrc.*q_carrier;
 figure(6)
 plot(signal_t,Xi);
 grid on;
-title('Xin carrier 16PSK waveform')
+title('4) Xin modulated F0=200Hz 16PSK waveform')
 figure(7)
 plot(signal_t,Xq);
 grid on;
-title('Xqn carrier 16PSK waveform')
+title('4) Xqn modulated F0=200Hz 16PSK waveform')
 
 %fft Xin SRRC with carrier
 fftshift_SRRC_Xin = fftshift(fft(Xi,Nf)*Ts);
@@ -106,11 +106,11 @@ power_fftshift_SRRC_Xqn = abs(fftshift_SRRC_Xqn).^2;     % zero-centered power
 figure(8)
 plot(freq,power_fftshift_SRRC_Xin)
 grid on;
-title('periodogram of instance Xin with carrier')
+title('4) periodogram of instance Xin modulated F0=200Hz')
 figure(9)
 plot(freq,power_fftshift_SRRC_Xqn)
 grid on;
-title('periodogram of instance Xqn with carrier')
+title('4) periodogram of instance Xqn modulated F0=200Hz')
 
 
 %5 add upp the 2 signals to be sent
@@ -118,7 +118,7 @@ Xt=Xi+Xq;
 figure(10)
 plot(signal_t,Xi);
 grid on;
-title('channel entrance X(t)')
+title('5) Sent signal Xt')
 
 %periodogram of sender output
 fftshift_Xt = fftshift(fft(Xt,Nf)*Ts);
@@ -127,7 +127,7 @@ power_fftshift_Xt = abs(fftshift_Xt).^2;     % zero-centered power
 figure(11)
 plot(freq,power_fftshift_Xt)
 grid on;
-title('periodogram of sender output Xt')
+title('5) periodogram of Sent signal Xt')
 
 %7 create gaussian noise
 SNR=10;
@@ -139,12 +139,12 @@ Y=Xt+W; %add noise
 figure(12)
 plot(signal_t,W);
 grid on;
-title('gaussian noise')
+title('7) gaussian noise')
 
 figure(13)
 plot(signal_t,Y);
 grid on;
-title('gaussian noise with signal')
+title('7) gaussian noise with signal')
 
 %8
 F0=200 %Hz reciever freq
@@ -157,11 +157,11 @@ Xq_reciever=Y.*q_reciever;
 figure(14)
 plot(signal_t,Xi_reciever);
 grid on;
-title('Xi_reciever 16PSK waveform')
+title('8) Xi_reciever 16PSK waveform')
 figure(15)
 plot(signal_t,Xq_reciever);
 grid on;
-title('Xq_reciever 16PSK waveform')
+title('8) Xq_reciever 16PSK waveform')
 
 %reciever periodogram
 %fft Xin reciever 
@@ -175,11 +175,11 @@ power_fftshift_reciever_Xqn = abs(fftshift_reciever_Xqn).^2;     % zero-centered
 figure(16)
 plot(freq,power_fftshift_reciever_Xin)
 grid on;
-title('periodogram of instance Xin reciever')
+title('8) periodogram of instance Xin reciever')
 figure(17)
 plot(freq,power_fftshift_reciever_Xqn)
 grid on;
-title('periodogram of instance Xqn reciever')
+title('8) periodogram of instance Xqn reciever')
 
 %9
 Xin_srrc_reciever = conv(Xi_reciever,phi)*Ts; %convolute symbols waveform with SRRC pulse
@@ -188,11 +188,11 @@ signal_t_reciever = [signal_t(1)+t(1):Ts:signal_t(end)+t(end)];
 figure(18)
 plot(signal_t_reciever,Xin_srrc_reciever);
 grid on;
-title('SRRC filtered instance Xin of 16PSK waveform')
+title('9) SRRC filtered instance Xin of 16PSK waveform')
 figure(19)
 plot(signal_t_reciever,Xqn_srrc_reciever);
 grid on;
-title('SRRC filtered instance Xqn of 16PSK waveform')
+title('9) SRRC filtered instance Xqn of 16PSK waveform')
 
 %defiltered reciever periodogram
 %fft Xin reciever 
@@ -206,11 +206,11 @@ power_fftshift_srrc_reciever_Xqn = abs(fftshift_srrc_reciever_Xqn).^2;     % zer
 figure(20)
 plot(freq,power_fftshift_srrc_reciever_Xin)
 grid on;
-title('periodogram of instance SRRC Xin reciever')
+title('9) periodogram of instance SRRC Xin reciever')
 figure(21)
 plot(freq,power_fftshift_srrc_reciever_Xqn)
 grid on;
-title('periodogram of instance SRRC Xqn reciever')
+title('9) periodogram of instance SRRC Xqn reciever')
 
 %10
 Xi_sampled=Xin_srrc_reciever(1:over:end);
@@ -221,6 +221,8 @@ X_reciever(1,:)=Xi_sampled;
 X_reciever(2,:)=Xq_sampled;
 figure(22)
 scatterplot(rot90(X_reciever));
+title('10) received symbols asterism')
+
 
 %11
 out_b=detect_PSK_16(X_reciever);
@@ -228,8 +230,12 @@ out_b=detect_PSK_16(X_reciever);
 bit_error=num_of_bit_errors(out_b,rot90(bit_seq))
 sym_error=num_of_symbol_errors(X,X_reciever)
 
+
 out_b(end-11:end)
 rot90(bit_seq(end-11:end))
+
+
+
 
 % save images
 % FolderName = ('C:\Users\chris\Desktop\THL I\ex3\thl1-ex3-matlab\images');   % using my directory
